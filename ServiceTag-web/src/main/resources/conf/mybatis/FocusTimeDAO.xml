@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper
+	namespace="com.cyou.fz2035.servicetag.focustime.dao.FocusTimeDAO">
+	
+	
+	<update id="endFocusTime" flushCache="true" >
+		<![CDATA[ 
+			update T_FOCUS_TIME set END_TIME=#{endTime},END_FLAG=1 where SERVICE_TAG_ID=#{serviceTagId} and USER_ID=#{userId} and END_FLAG=0
+		]]>
+	</update>
+	
+	<select id="validDC" flushCache="true" resultType="com.cyou.fz2035.servicetag.focustime.bean.FocusTime">
+		<![CDATA[ 
+			select * from T_FOCUS_TIME where SERVICE_TAG_ID=#{serviceTagId} and USER_ID=#{userId} and START_TIME<=#{endTime} and END_TIME>=#{endTime}
+		]]>
+	</select>
+</mapper>
+
+
+

@@ -1,0 +1,62 @@
+{{#judge listData.length 0}}
+    <div class="nodata-box">
+        <img src="http://ue1.17173cdn.com/a/2035/open/2014/img/nodata.jpg" alt="暂无服务号" width="84" height="90">
+        <div class="tit">暂无数据</div>
+    </div>
+{{else}}
+    {{#if ../isAll}}
+        <div class="mod-hd">
+            <div class="tit tit-name">服务号名称</div>
+            <div class="tit tit-name">申请人</div>
+            <div class="tit w-1">当前状态</div>
+            <div class="tit w-1">资料审核</div>
+            <div class="tit">操作时间</div>
+        </div>
+        <div class="comm-bd">
+            <ul class="comm-list">
+                {{#each listData}}
+                    <li class="list-item" data-id="{{id}}">
+                        <div class="pic-box"><img src="{{getImage serviceTagImg}}?w=50&h=50&q=75" width="40" height="40" alt="" class="pic-service"></div>
+                        <div class="info name" title="{{{serviceTagName}}}">{{{serviceTagName}}}</div>
+                        <div class="info name" title="{{userName}}">{{userName}}</div>
+                        {{#judge status '11'}}
+                            <div class="info w-1 c-tx1">停用</div>
+                        {{else}}
+                            <div class="info w-1">{{statusName}}</div>
+                        {{/judge}}
+                        <div class="info w-1">{{#if secondCheckStatusName}}{{secondCheckStatusName}}{{else}}&nbsp;{{/if}}</div>
+                        <div class="info">{{fDate updateTime}}</div>
+                        {{#judge status '10'}}
+                            <a href="javascript:;" class="btn comm-btn2" data-role="stop">停用</a>
+                        {{/judge}}
+                        {{#judge status '11'}}
+                            <a href="javascript:;" class="btn comm-btn2" data-role="start">启用</a>
+                        {{/judge}}
+                        <a href="javascript:;" class="btn comm-btn2" data-role="get">查看</a>
+                    </li>
+                {{/each}}
+            </ul>
+            <ul class="pagination" id="J_Page"></ul>
+        </div>
+    {{else}}
+        <div class="mod-hd">
+            <div class="tit tit-name">服务号名称</div>
+            <div class="tit tit-name">申请人</div>
+            <div class="tit">操作时间</div>
+        </div>
+        <div class="comm-bd">
+            <ul class="comm-list">
+                {{#each listData}}
+                    <li class="list-item" data-id="{{id}}">
+                        <div class="pic-box"><img src="{{getImage serviceTagImg}}?w=50&h=50&q=75" width="40" height="40" alt="" class="pic-service"></div>
+                        <div class="info name" title="{{serviceTagName}}">{{serviceTagName}}</div>
+                        <div class="info name" title="{{createUserName}}">{{createUserName}}</div>
+                        <div class="info">{{fDate createTime}}</div>
+                        <a href="javascript:;" class="btn comm-btn2" data-role="get">审核</a>
+                    </li>
+                {{/each}}
+            </ul>
+            <ul class="pagination" id="J_Page"></ul>
+        </div>
+    {{/if}}
+{{/judge}}

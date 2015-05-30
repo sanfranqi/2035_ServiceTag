@@ -1,0 +1,29 @@
+<form id="J_UserGroupDialog_Form">
+    {{#if userGroup}}
+        <input type="hidden" name="userGroupId" value="{{userGroup.id}}" />
+    {{/if}}
+    <table class="comm-table">
+        <tbody>
+        <tr>
+            <th>分组名称</th>
+            <td>
+                <div class="form-group">
+                    {{#if userGroup}}
+                        <input type="text" class="form-control" name="userGroupName" value="{{userGroup.userGroupName}}" />
+                    {{else}}
+                        <input type="text" class="form-control" name="userGroupName" />
+                    {{/if}}
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <th></th>
+            <td>
+                <div class="form-group form-group-inline has-error">
+                    <p class="validatorError help-block">&nbsp;</p>
+                </div>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</form>

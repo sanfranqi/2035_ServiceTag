@@ -1,0 +1,31 @@
+<div class="{{classPrefix}}-main">
+
+    {{#if title}}
+        <div class="{{classPrefix}}-header">
+            <h2 class="tit">{{{title}}}</h2>
+        </div>
+    {{/if}}
+
+    <div class="{{classPrefix}}-con">
+        <div data-role="message">
+            {{{message}}}
+        </div>
+    </div>
+
+    {{#if hasFoot}}
+        <div class="{{classPrefix}}-footer" data-role="foot">
+            {{#if cancelTpl}}
+                <div data-role="cancel" class="dialog-btn">
+                    {{{cancelTpl}}}
+                </div>
+            {{/if}}
+            {{#if confirmTpl}}
+                <div data-role="confirm" class="dialog-btn">
+                    {{{confirmTpl}}}
+                </div>
+            {{/if}}
+        </div>
+    {{else}}
+        <div class="{{classPrefix}}-footer"></div>
+    {{/if}}
+</div>

@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.cyou.fz2035.servicetag.serviceattrvalue.dao.ServiceAttrValueDAO">
+
+
+    <insert id="insertAttrValues">
+        insert into T_SERVICE_ATTR_VALUE
+        (
+        SERVICE_ATTR_VALUE,SERVICE_BASE_ID,SERVICE_ATTR_CODE
+        )
+        <foreach collection="attrValues" item="attrValue" index="index" separator="union all">
+            select
+            #{attrValue.serviceAttrValue},
+            #{serviceBaseId},
+            #{attrValue.serviceAttrCode}
+            from dual
+        </foreach>
+    </insert>
+
+    <delete id="deleteAttrValuesByServiceBase">
+        delete from T_SERVICE_ATTR_VALUE where SERVICE_BASE_ID = #{serviceBaseId}
+    </delete>
+
+    <delete id="deleteAttrValuesByServiceBaseIdAndAttrs">
+        delete from T_SERVICE_ATTR_VALUE where SERVICE_BASE_ID = #{serviceBaseId}
+        and SERVICE_ATTR_CODE IN (
+        <foreach item="attrCode" collection="attrCodes" index="index"
+                 separator=",">
+            #{attrCode}
+        </foreach>
+        )
+    </delete>
+
+    <select id="findAttrValuesMapByServiceBase"
+            resultType="java.util.Map">
+        select SERVICE_BASE_ID as serviceBaseId,
+        <foreach item="attrCode" collection="attrCodes" index="index"
+                 separator=",">
+            max(case SERVICE_ATTR_CODE when #{attrCode} then SERVICE_ATTR_VALUE else NULL end) #{attrCode}
+        </foreach>
+        from T_SERVICE_ATTR_VALUE
+        where SERVICE_BASE_ID = #{serviceBaseId}
+    </select>
+
+    <select id="findAttrValueByServiceBaseAndAttr" resultType="java.lang.String">
+        select SERVICE_ATTR_VALUE from T_SERVICE_ATTR_VALUE where SERVICE_BASE_ID = #{serviceBaseId}
+        and SERVICE_ATTR_CODE = #{attrCode}
+    </select>
+
+    <select id="findAttrValuesByServiceBase"
+            resultType="com.cyou.fz2035.servicetag.serviceattrvalue.bean.ServiceAttrValue">
+        select * from T_SERVICE_ATTR_VALUE where SERVICE_BASE_ID = #{serviceBaseId}
+    </select>
+    
+    <update id="upateAttrValues">
+    	update T_SERVICE_ATTR_VALUE set SERVICE_ATTR_VALUE=#{value} where SERVICE_BASE_ID = #{serviceBaseId}
+        and SERVICE_ATTR_CODE = #{attrCode}
+    </update>
+
+</mapper>

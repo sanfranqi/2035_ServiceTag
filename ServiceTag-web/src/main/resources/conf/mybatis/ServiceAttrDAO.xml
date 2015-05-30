@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.cyou.fz2035.servicetag.serviceattr.dao.ServiceAttrDAO">
+
+
+    <select id="findAttrByServiceType" flushCache="true"
+            parameterType="java.lang.String" resultType="java.lang.String">
+            select SERVICE_ATTR_CODE from T_SERVICE_ATTR where SERVICE_TYPE = #{serviceType}
+    </select>
+    <select id="findAttrsByServiceType" resultType="com.cyou.fz2035.servicetag.serviceattr.bean.ServiceAttr"
+            parameterType="java.lang.String" flushCache="true">
+             select id as id, SERVICE_ATTR_NAME AS serviceAttrName,
+             SERVICE_ATTR_CODE as serviceAttrCode,
+             SERVICE_TYPE AS serviceType,
+             SERVICE_ATTR_TYPE AS serviceAttrType
+             from T_SERVICE_ATTR where SERVICE_TYPE = #{serviceType}
+    </select>
+
+</mapper>

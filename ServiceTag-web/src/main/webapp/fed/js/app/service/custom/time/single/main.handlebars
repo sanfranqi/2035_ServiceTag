@@ -1,0 +1,111 @@
+<div class="mobile-box" id="J_Preview"></div>
+<div class="comm-mod2 mod-custom">
+    <form id="J_Form">
+        <input type="hidden" name="serviceBaseVo.id" {{#if this}}value="{{serviceBaseVo.id}}"{{/if}} />
+        <input type="hidden" name="serviceBaseVo.businessId" {{#if this}}value="{{serviceBaseVo.businessId}}"{{/if}} />
+        <input type="hidden" name="serviceBaseVo.status" {{#if this}}value="{{serviceBaseVo.status}}"{{/if}} />
+        <input type="hidden" name="uuId" {{#if this}}{{#if detailsAddition.uuId}}value="{{detailsAddition.uuId}}"{{/if}}{{/if}} />
+
+        <div class="mod-hd">
+            {{#if this}}
+                <h2 class="tit">编辑日程</h2>
+            {{else}}
+                <h2 class="tit">创建日程</h2>
+            {{/if}}
+        </div>
+        <div class="mod-bd">
+            <table class="comm-table">
+                <tbody>
+                <tr>
+                    <th><span class="c-sign">*</span>名称</th>
+                    <td>
+                        <div class="form-group">
+                            <input type="text" class="form-control" name="serviceBaseVo.serviceName" {{#if this}}value="{{serviceBaseVo.serviceName}}"{{/if}}>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <th>描述</th>
+                    <td>
+                        <div class="form-group">
+                            <textarea class="form-control form-control-textarea" name="serviceBaseVo.serviceDescribe" rows="5">{{#if this}}{{serviceBaseVo.serviceDescribe}}{{/if}}</textarea>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <th><span class="c-sign">*</span>时间</th>
+                    <td>
+                        <div class="form-group form-time">
+                            <input type="text" class="form-control" id="J_StartTime" name='detailsAddition["startTime"]' readonly="readonly" {{#if this}}value="{{#judge detailsAddition.isRepeat '1'}}{{fTime detailsAddition.startTime}}{{else}}{{fDate detailsAddition.startTime}}{{/judge}}"{{/if}}>
+                            <span class="sep">-</span>
+                            <input type="text" class="form-control" id="J_EndTime" name='detailsAddition["endTime"]' readonly="readonly" {{#if this}}value="{{#judge detailsAddition.isRepeat '1'}}{{fTime detailsAddition.endTime}}{{else}}{{fDate detailsAddition.endTime}}{{/judge}}"{{/if}}>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <th></th>
+                    <td>
+                        <div class="form-group form-check">
+                            <div class="check-box" id="J_IsRepeat">
+                                <div class="check-in"></div>
+                                <div class="check-txt">重复周期</div>
+                            </div>
+                            <div class="check-box" id="J_IsAllDay">
+                                <div class="check-in"></div>
+                                <div class="check-txt">全天事件</div>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr id="J_Repeat" {{#if this}}{{#judge detailsAddition.isRepeat '0'}} style="display: none;" {{/judge}}{{else}} style="display: none;" {{/if}}>
+                    <th><span class="c-sign">*</span>重复日期</th>
+                    <td>
+                        <div class="form-group form-time">
+                            <input type="text" class="form-control" id="J_RepeatStartTime" name='detailsAddition["repeatStartTime"]' readonly="readonly" {{#if this}}value="{{fShortDate detailsAddition.repeatStartTime}}"{{/if}}>
+                            <span class="sep">-</span>
+                            <input type="text" class="form-control" id="J_RepeatEndTime" name='detailsAddition["repeatEndTime"]' readonly="readonly" {{#if this}}value="{{fShortDate detailsAddition.repeatEndTime}}"{{/if}}>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <th>提醒设置</th>
+                    <td>
+                        <div class="form-group">
+                            <select class="form-control form-control-drop" name='detailsAddition["remind"]' id="J_Remind">
+                                <option value="30">提前30分钟</option>
+                                <option value="10">提前10分钟</option>
+                                <option value="-1">不提醒</option>
+                            </select>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <th></th>
+                    <td>
+                        <div class="form-group form-group-inline has-error">
+                            <p class="validatorError help-block">&nbsp;</p>
+                        </div>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="mod-footer">
+            {{#if this}}
+                {{#judge serviceBaseVo.status '10'}}
+                {{!-- 保存未发布 --}}
+                    <a href="javascript:;" class="comm-btn" data-role="saveAndPublish">保存并发布</a>
+                    <a href="javascript:;" class="comm-btn" data-role="save">保存</a>
+                    <a href="javascript:;" class="comm-btn" data-role="cancel">还原</a>
+                {{else}}
+                {{!-- 已经发布 --}}
+                    <a href="javascript:;" class="comm-btn" data-role="saveAndRepublish">保存并同步</a>
+                    <a href="javascript:;" class="comm-btn" data-role="cancel">还原</a>
+                {{/judge}}
+            {{else}}
+                <a href="javascript:;" class="comm-btn" data-role="saveAndPublish">保存并发布</a>
+                <a href="javascript:;" class="comm-btn" data-role="save">保存</a>
+            {{/if}}
+        </div>
+    </form>
+</div>

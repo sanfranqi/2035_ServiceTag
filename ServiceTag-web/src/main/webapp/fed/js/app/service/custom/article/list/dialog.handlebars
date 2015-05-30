@@ -1,0 +1,33 @@
+<form id="J_Dialog_Form">
+    <input type="hidden" name="serviceBaseVo.id" {{#if this}}value="{{serviceBaseVo.id}}"{{/if}} />
+    <input type="hidden" name="serviceBaseVo.businessId" {{#if this}}value="{{serviceBaseVo.businessId}}"{{/if}} />
+
+    <table class="comm-table">
+        <tbody>
+            <tr>
+                <th><span class="c-sign">*</span>标题</th>
+                <td>
+                    <div class="form-group">
+                        <input type="text" class="form-control form-control-w3" name="serviceBaseVo.serviceName" {{#if this}}value="{{serviceBaseVo.serviceName}}"{{/if}}>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <th><span class="c-sign">*</span>链接地址</th>
+                <td>
+                    <div class="form-group">
+                        <input type="text" class="form-control form-control-w45" name="serviceBaseVo.serviceDescribe" {{#if this}}value="{{serviceBaseVo.serviceDescribe}}"{{/if}}>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <th></th>
+                <td>
+                    <div class="form-group form-group-inline has-error">
+                        <p class="validatorError help-block">&nbsp;</p>
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</form>

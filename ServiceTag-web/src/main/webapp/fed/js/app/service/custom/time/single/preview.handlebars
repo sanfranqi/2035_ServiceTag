@@ -1,0 +1,39 @@
+<div class="mobile-hd">
+    <h2 class="tit">日程详情预览</h2>
+    <div class="time">{{now}}</div>
+</div>
+<div class="mobile-bd">
+    {{#if this}}
+        <div class="article">
+            <div class="tit">{{serviceBaseVo.serviceName}}</div>
+            <div class="txt">{{serviceBaseVo.serviceDescribe}}</div>
+        </div>
+        <div class="info">
+            {{#judge detailsAddition.isRepeat "1"}}
+                <div>时&emsp;&emsp;间：{{fTime detailsAddition.startTime}}~{{fTime detailsAddition.endTime}}</div>
+            {{else}}
+                <div>时&emsp;&emsp;间：{{fDate detailsAddition.startTime}}~{{fDate detailsAddition.endTime}}</div>
+            {{/judge}}
+            {{#judge detailsAddition.isRepeat "1"}}
+                <div>重复日期：{{fShortDate detailsAddition.repeatStartTime}}~{{fShortDate detailsAddition.repeatEndTime}}</div>
+            {{/judge}}
+            {{#judge detailsAddition.remind "-1"}}
+                <div>提醒设置：不提醒</div>
+            {{else}}
+                <div>提醒设置：提前{{detailsAddition.remind}}分钟</div>
+            {{/judge}}
+        </div>
+    {{else}}
+        <div class="nodata-box">
+            <img src="http://ue1.17173cdn.com/a/2035/open/2014/img/nodata.jpg" alt="暂无数据" width="84" height="90">
+            <div class="tit">暂无数据...</div>
+        </div>
+    {{/if}}
+</div>
+<div class="mobile-footer">
+    {{!--{{#if this}}--}}
+        {{!--{{#if serviceBaseVo.id}}--}}
+            {{!--<a href="javascript:;" class="comm-btn" data-role="del" data-id="{{serviceBaseVo.id}}">删除</a>--}}
+        {{!--{{/if}}--}}
+    {{!--{{/if}}--}}
+</div>

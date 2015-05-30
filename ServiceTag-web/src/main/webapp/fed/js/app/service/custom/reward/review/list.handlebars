@@ -1,0 +1,56 @@
+{{#judge listData.length 0}}
+    <div class="nodata-box">
+        <img src="http://ue1.17173cdn.com/a/2035/open/2014/img/nodata.jpg" alt="暂无数据" width="84" height="90">
+        <div class="tit">暂无数据...</div>
+    </div>
+{{else}}
+    {{#each listData}}
+        <div class="list-item" data-replyid="{{id}}" {{#judge review_status "1"}}data-star="{{star}}"{{/judge}}>
+            <div class="pic-box">
+                <img src="{{getAvatars userinfo.userId}}" class="pic-per" alt="">
+            </div>
+            <div class="detail-box">
+                <div class="detail-c1">
+                    <div class="name">{{userinfo.fullName}}</div>
+                    <div class="txt">{{content}}</div>
+                    {{#notEmptyArray fujian}}
+                        <div class="accessory-box2">
+                            <div class="tit">附件：</div>
+
+                            {{#each fujian}}
+                                {{#isPic name}}
+                                    <div class="info">
+                                        <span>{{name}}</span><a href="javascript:;" data-role="preview" data-url="{{path}}" class="link">预览</a><a href="{{path}}" target="_blank" class="link">下载</a>
+                                    </div>
+                                {{else}}
+                                    <div class="info">
+                                        <span>{{name}}</span><a href="{{path}}" target="_blank" class="link">下载</a>
+                                    </div>
+                                {{/isPic}}
+                            {{/each}}
+                        </div>
+                    {{/notEmptyArray}}
+                </div>
+                <div class="detail-c2">
+                    {{#judge review_status "1"}}
+                        <div class="star-box done star-box-l{{star}}">
+                    {{else}}
+                        <div class="star-box star-box-edit">
+                    {{/judge}}
+                        <i class="ico ico-star ico-star0" data-class="star-box-l0" data-star="0" title="〇星：作废"></i>
+                        <i class="ico ico-star ico-star1" data-class="star-box-l1" data-star="1" title="一星：谢谢参与"></i>
+                        <i class="ico ico-star ico-star2" data-class="star-box-l2" data-star="2" title="二星：有参考价值"></i>
+                        <i class="ico ico-star ico-star3" data-class="star-box-l3" data-star="3" title="三星：有启发"></i>
+                        <i class="ico ico-star ico-star4" data-class="star-box-l4" data-star="4" title="四星：可以用"></i>
+                        <i class="ico ico-star ico-star5" data-class="star-box-l5" data-star="5" title="五星：非常好"></i>
+                    </div>
+                    {{#judge review_status "1"}}
+                        <a href="javascript:;" class="comm-btn btn-w" data-role="resubmit">重新评审</a>
+                    {{else}}
+                        <a href="javascript:;" class="comm-btn btn-w" data-role="submit">提交评审</a>
+                    {{/judge}}
+                </div>
+            </div>
+        </div>
+    {{/each}}
+{{/judge}}

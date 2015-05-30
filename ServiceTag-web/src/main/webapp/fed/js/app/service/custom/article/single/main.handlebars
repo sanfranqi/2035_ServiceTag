@@ -1,0 +1,70 @@
+<div class="mobile-box" id="J_Preview"></div>
+<div class="comm-mod2 mod-custom">
+    <form id="J_Form">
+        <input type="hidden" name="serviceBaseVo.id" {{#if this}}value="{{serviceBaseVo.id}}"{{/if}} />
+        <input type="hidden" name="serviceBaseVo.businessId" {{#if this}}value="{{serviceBaseVo.businessId}}"{{/if}} />
+
+        <div class="mod-hd">
+            {{#if this}}
+                <h2 class="tit">编辑图文</h2>
+            {{else}}
+                <h2 class="tit">创建图文</h2>
+            {{/if}}
+        </div>
+        <div class="mod-bd">
+            <table class="comm-table">
+                <tbody>
+                <tr>
+                    <th><span class="c-sign">*</span>标题</th>
+                    <td>
+                        <div class="form-group">
+                            <input type="text" class="form-control" name="serviceBaseVo.serviceName" {{#if this}}value="{{serviceBaseVo.serviceName}}"{{/if}}>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <th>作者</th>
+                    <td>
+                        <div class="form-group">
+                            <input type="text" class="form-control" name="author" {{#if this}}value="{{detailsAddition.author}}"{{/if}}>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <th><span class="c-sign">*</span>正文</th>
+                    <td>
+                        <div class="form-group">
+                            <textarea id="container" name="serviceBaseVo.serviceDescribe">{{#if this}}{{serviceBaseVo.serviceDescribe}}{{/if}}</textarea>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <th></th>
+                    <td>
+                        <div class="form-group form-group-inline has-error">
+                            <p class="validatorError help-block">&nbsp;</p>
+                        </div>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="mod-footer">
+            {{#if this}}
+                {{#judge serviceBaseVo.status '10'}}
+                {{!-- 保存未发布 --}}
+                    <a href="javascript:;" class="comm-btn" data-role="saveAndPublish">保存并发布</a>
+                    <a href="javascript:;" class="comm-btn" data-role="save">保存</a>
+                    <a href="javascript:;" class="comm-btn" data-role="cancel">还原</a>
+                {{else}}
+                {{!-- 已经发布 --}}
+                    <a href="javascript:;" class="comm-btn" data-role="saveAndRepublish">保存并同步</a>
+                    <a href="javascript:;" class="comm-btn" data-role="cancel">还原</a>
+                {{/judge}}
+            {{else}}
+                <a href="javascript:;" class="comm-btn" data-role="saveAndPublish">保存并发布</a>
+                <a href="javascript:;" class="comm-btn" data-role="save">保存</a>
+            {{/if}}
+        </div>
+    </form>
+</div>

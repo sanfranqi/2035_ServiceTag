@@ -1,0 +1,24 @@
+{
+    "name": "jqPaginator",
+    "family": "keenwon",
+    "description": "基于jquery的自定义分页组件",
+    "version": "1.1.0",
+    "homepage": "http://jqpaginator.keenwon.com",
+    "author": {
+        "name": "keenwon",
+        "url": "https://keenwon.com"
+    },
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/keenwon/jqPaginator.git"
+    },
+    "bugs": {
+        "url": "http://keenwon.com/1124.html"
+    },
+    "licenses": [
+        {
+            "type": "MIT",
+            "url": "https://github.com/jquery/jquery/blob/master/MIT-LICENSE.txt"
+        }
+    ]
+}

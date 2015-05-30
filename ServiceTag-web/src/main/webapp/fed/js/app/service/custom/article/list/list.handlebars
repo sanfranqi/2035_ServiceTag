@@ -1,0 +1,31 @@
+{{#judge listData.length 0}}
+    <div class="nodata-box">
+        <img src="http://ue1.17173cdn.com/a/2035/open/2014/img/nodata.jpg" alt="暂无数据" width="84" height="90">
+        <div class="tit">暂无数据...</div>
+    </div>
+{{else}}
+    <div class="comm-mod">
+        <div class="mod-hd">
+            <div class="tit tit-name w-32">标题</div>
+            <div class="tit w-1">类别</div>
+            <div class="tit w-1">状态</div>
+            <div class="tit">操作时间</div>
+        </div>
+        <div class="comm-bd">
+            <ul class="comm-list">
+                {{#each listData}}
+                    <li class="list-item" data-id="{{id}}" data-type="{{serviceType}}">
+                        <a href="javascript:;" class="info name w-3 comm-link" title="{{serviceName}}" data-role="get">{{serviceName}}</a>
+                        <div class="info w-1">{{serviceTypeName}}</div>
+                        <div class="info w-1">{{statusName}}</div>
+                        <div class="info">{{fDate updateTime}}</div>
+
+                        <a href="javascript:;" class="btn comm-btn2 comm-btn2-ex2" data-role="del">删除</a>
+                        <a href="javascript:;" class="btn comm-btn2" data-role="get">查看</a>
+                    </li>
+                {{/each}}
+            </ul>
+            <ul class="pagination" id="J_Page"></ul>
+        </div>
+    </div>
+{{/judge}}

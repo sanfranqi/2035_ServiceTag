@@ -1,0 +1,38 @@
+{{#judge listData.length 0}}
+    <div class="nodata-box">
+        <img src="http://ue1.17173cdn.com/a/2035/open/2014/img/nodata.jpg" alt="暂无数据" width="84" height="90">
+
+        <div class="tit">暂无数据...</div>
+    </div>
+{{else}}
+    <div class="comm-mod">
+        <div class="mod-hd">
+            <div class="check-box check-all">
+                <div class="check-in"></div>
+                <div class="check-txt">全选</div>
+            </div>
+            <div class="tit tit-name">用户名称</div>
+            <div class="tit w-15">手机号码</div>
+            <div class="tit">关注时间</div>
+        </div>
+        <div class="comm-bd">
+            <ul class="comm-list">
+                {{#each listData}}
+                    <li class="list-item" data-userid="{{userId}}">
+                        <div class="check-box">
+                            <div class="check-in"></div>
+                        </div>
+                        <div class="pic-box"><img src="{{getAvatars userId}}" width="40" height="40" alt="" class="pic-user"></div>
+                        <div class="info name" title="{{userName}}">{{userName}}</div>
+                        <div class="info w-15">{{cellphone}}</div>
+                        <div class="info">{{fDate focusTime}}</div>
+                        <a href="javascript:;" class="btn btn-black" data-role="black" title="加入黑名单"></a>
+                    </li>
+                {{/each}}
+            </ul>
+
+            <ul class="pagination" id="J_Page"></ul>
+
+        </div>
+    </div>
+{{/judge}}

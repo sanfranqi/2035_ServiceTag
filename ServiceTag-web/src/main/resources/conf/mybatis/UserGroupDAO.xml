@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper
+	namespace="com.cyou.fz2035.servicetag.usergroup.dao.UserGroupDAO">
+	
+	<resultMap type="com.cyou.fz2035.servicetag.usergroup.bean.UserGroup"
+		id="userGroup">
+		<result property="id" column="ID" />
+		<result property="userGroupName" column="USER_GROUP_NAME" />
+		<result property="userGroupType" column="USER_GROUP_TYPE" />
+		<result property="serviceTagId" column="SERVICE_TAG_ID" />
+	</resultMap>
+	
+	<select id="findGroupByServiceTagIdAndUserId" flushCache="true" resultMap="userGroup">
+		<![CDATA[ 
+			select tug.* from T_USER_GROUP tug where tug.SERVICE_TAG_ID=#{serviceTagId} and tug.ID in (
+			select tugru.USER_GROUP_ID from T_USER_GROUP_REL_USER tugru where tugru.USER_ID=#{userId})
+		]]>
+	</select>
+</mapper>
+
+
+

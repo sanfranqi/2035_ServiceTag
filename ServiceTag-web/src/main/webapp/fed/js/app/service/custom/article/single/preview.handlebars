@@ -1,0 +1,27 @@
+<div class="mobile-hd">
+    <h2 class="tit">图文详情预览</h2>
+    <div class="time">{{now}}</div>
+</div>
+<div class="mobile-bd">
+    {{#if this}}
+        <div class="article">
+            <div class="tit">{{serviceBaseVo.serviceName}}</div>
+            {{#if detailsAddition.author}}
+                <div class="author">{{detailsAddition.author}}</div>
+            {{/if}}
+            <div class="txt">{{{serviceBaseVo.serviceDescribe}}}</div>
+        </div>
+    {{else}}
+        <div class="nodata-box">
+            <img src="http://ue1.17173cdn.com/a/2035/open/2014/img/nodata.jpg" alt="暂无数据" width="84" height="90">
+            <div class="tit">暂无数据...</div>
+        </div>
+    {{/if}}
+</div>
+<div class="mobile-footer">
+    {{!--{{#if this}}--}}
+        {{!--{{#if serviceBaseVo.id}}--}}
+            {{!--<a href="javascript:;" class="comm-btn" data-role="del" data-id="{{serviceBaseVo.id}}">删除</a>--}}
+        {{!--{{/if}}--}}
+    {{!--{{/if}}--}}
+</div>

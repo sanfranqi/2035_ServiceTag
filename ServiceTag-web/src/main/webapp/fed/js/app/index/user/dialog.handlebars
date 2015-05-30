@@ -1,0 +1,84 @@
+<div class="dialog-service">
+    <form id="J_Dialog_Form">
+        {{#if inAuthDetails}}
+            <input type="hidden" name="id" value="{{id}}">
+            <input type="hidden" name="serviceTagId" value="{{serviceTagId}}">
+        {{else}}
+            {{#if id}}
+                <input type="hidden" name="serviceTagId" value="{{id}}">
+            {{/if}}
+        {{/if}}
+        <input type="text" name="serviceTagImg" value="{{serviceTagImg}}" style="visibility:hidden;"/>
+        <table class="comm-table">
+            <tbody>
+            <tr>
+                <th><span class="c-sign">*</span>类型</th>
+                <td>
+                    <div class="type-box">
+                        <a href="javascript:;" class="comm-btn3 {{#judge serviceTagType '101'}}comm-btn3-checked{{/judge}} {{#unless serviceTagType}}comm-btn3-checked{{/unless}}"
+                           data-typeid="101">互联网</a>
+                        <a href="javascript:;" class="comm-btn3 {{#judge serviceTagType '100'}}comm-btn3-checked{{/judge}}" data-typeid="100">教育</a>
+                        <a href="javascript:;" class="comm-btn3 {{#judge serviceTagType '102'}}comm-btn3-checked{{/judge}}" data-typeid="102">企业</a>
+                        <a href="javascript:;" class="comm-btn3 {{#judge serviceTagType '103'}}comm-btn3-checked{{/judge}}" data-typeid="103">健康</a>
+                        <a href="javascript:;" class="comm-btn3 {{#judge serviceTagType '104'}}comm-btn3-checked{{/judge}}" data-typeid="104">文化</a>
+                        <a href="javascript:;" class="comm-btn3 {{#judge serviceTagType '999'}}comm-btn3-checked{{/judge}}" data-typeid="999">其他</a>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <th><span class="c-sign">*</span>名称</th>
+                <td>
+                    <div class="form-group has-error">
+                        <input type="text" class="form-control form-control-w3" name="serviceTagName" value="{{{serviceTagName}}}" />
+                        <span class="help-tip">首字符必须是英文、数字或中文，最多10位字符。</span>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <th><span class="c-sign">*</span>头像</th>
+                <td>
+                    <div class="form-group">
+                        <a href="javascript:;" class="comm-btn btn-w" id="J_Uploader">上传头像</a>
+                        <span class="help-tip">请上传服务号头像，支持.jpg、.jpeg、.bmp、.gif格式图片，大小不超过2M。</span>
+                    </div>
+                    <div class="portrait-box">
+                        <div class="pic-box">
+                            <img {{#if serviceTagImg}}src="{{getImage serviceTagImg}}?w=200&h=200&q=75"{{else}}src="http://ue1.17173cdn.com/a/2035/open/2014/img/t0.jpg"{{/if}} width="200" height="200" alt="" class="pic" data-size="big">
+                            <div class="txt">200px*200px</div>
+                        </div>
+                        <div class="pic-box">
+                            <img {{#if serviceTagImg}}src="{{getImage serviceTagImg}}?w=96&h=96&q=75"{{else}}src="http://ue1.17173cdn.com/a/2035/open/2014/img/t0.jpg"{{/if}} width="96" height="96" alt="" class="pic" data-size="middle">
+                            <div class="txt">96px*96px</div>
+                        </div>
+                        <div class="pic-box">
+                            <img {{#if serviceTagImg}}src="{{getImage serviceTagImg}}?w=50&h=50&q=75"{{else}}src="http://ue1.17173cdn.com/a/2035/open/2014/img/t0.jpg"{{/if}} width="50" height="50" alt="" class="pic" data-size="min">
+                            <div class="txt">50px*50px</div>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <th>说明</th>
+                <td>
+                    <div class="form-group">
+                        <textarea class="form-control form-control-textarea" rows="5" name="remark">{{{remark}}}</textarea>
+                        <span class="help-tip">不超过300个字符</span>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <th></th>
+                <td>
+                    <div class="form-group form-group-inline has-error">
+                        <p class="validatorError help-block">&nbsp;</p>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+
+        {{#if id}}
+            <div class="help-tip2"><i class="ico ico-tip"></i>服务号资料修改后，超管将会重新进行审核。</div>
+        {{/if}}
+    </form>
+</div>

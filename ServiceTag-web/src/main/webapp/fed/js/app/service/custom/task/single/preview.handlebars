@@ -1,0 +1,40 @@
+<div class="mobile-hd">
+    <h2 class="tit">任务详情预览</h2>
+    <div class="time">{{now}}</div>
+</div>
+<div class="mobile-bd">
+    {{#if this}}
+        <div class="article">
+            <div class="tit">{{serviceBaseVo.serviceName}}</div>
+            <div class="txt">{{serviceBaseVo.serviceDescribe}}</div>
+        </div>
+        <div class="info">
+            <div>开始时间：{{fDate detailsAddition.startTime}}</div>
+            <div>结束时间：{{fDate detailsAddition.endTime}}</div>
+            <div class="accessory-tit">附  件：</div>
+            <div class="accessory-box">
+                {{#if detailsAddition.attachFiles1}}
+                    <div class="accessory"><img src="{{getFileIcon detailsAddition.attachFiles1}}" alt="" class="pic-accessory" width="56" height="56"></div>
+                {{/if}}
+                {{#if detailsAddition.attachFiles2}}
+                    <div class="accessory"><img src="{{getFileIcon detailsAddition.attachFiles2}}" alt="" class="pic-accessory" width="56" height="56"></div>
+                {{/if}}
+                {{#if detailsAddition.attachFiles3}}
+                    <div class="accessory"><img src="{{getFileIcon detailsAddition.attachFiles3}}" alt="" class="pic-accessory" width="56" height="56"></div>
+                {{/if}}
+            </div>
+        </div>
+    {{else}}
+        <div class="nodata-box">
+            <img src="http://ue1.17173cdn.com/a/2035/open/2014/img/nodata.jpg" alt="暂无数据" width="84" height="90">
+            <div class="tit">暂无数据...</div>
+        </div>
+    {{/if}}
+</div>
+<div class="mobile-footer">
+    {{!--{{#if this}}--}}
+        {{!--{{#if serviceBaseVo.id}}--}}
+            {{!--<a href="javascript:;" class="comm-btn" data-role="del" data-id="{{serviceBaseVo.id}}">删除</a>--}}
+        {{!--{{/if}}--}}
+    {{!--{{/if}}--}}
+</div>

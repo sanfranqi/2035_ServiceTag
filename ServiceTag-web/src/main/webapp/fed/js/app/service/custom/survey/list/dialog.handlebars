@@ -1,0 +1,36 @@
+<div class="dialog-service">
+    <form id="J_Dialog_Form">
+        <table class="comm-table">
+            <tbody>
+            <tr>
+                <th><span class="c-sign">*</span>问卷名称</th>
+                <td>
+                    <div class="form-group has-error">
+                        <input type="text" class="form-control form-control-w3" name="title" />
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <th><span class="c-sign">*</span>选择分类</th>
+                <td>
+                    <div class="form-group">
+                        <select class="form-control form-control-w16" name="classId">
+                            {{#each this}}
+                                <option value="{{classId}}">{{name}}</option>
+                            {{/each}}
+                        </select>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <th></th>
+                <td>
+                    <div class="form-group form-group-inline has-error">
+                        <p class="validatorError help-block">&nbsp;</p>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </form>
+</div>

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+	    http://www.springframework.org/schema/beans/spring-beans.xsd         
+	    http://code.alibabatech.com/schema/dubbo         
+	    http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
+
+    <!-- <import resource="classpath:/soa-dubbo-extension.xml" /> -->
+    <import resource="application-context.xml"></import>
+    <!-- 提供方应用信息，用于计算依赖关系 -->
+    <dubbo:application name="2035-servicetag"/>
+    <dubbo:protocol name="dubbo" port="${dubbo.protocol.port}"/>
+    <!-- 使用zkp注册中心暴露服务地址 -->
+    <dubbo:registry address="${dubbo.registry.address}"
+                    client="zkclient" default="true"/>
+    <!-- 监控服务 -->
+   <!--  <dubbo:monitor protocol="registry"/> -->
+
+    <!--作为提供提供方 -->
+   <bean id="serviceTagSOAService" class="com.cyou.fz2035.servicetag.soaservice.ServiceTagSOAServiceImpl"/>
+   <dubbo:service interface="com.cyou.fz2035.servicetag.soaservices.service.ServiceTagSOAService"
+        ref="serviceTagSOAService" version="1.0.0" timeout="20000"></dubbo:service>
+
+    <!--作为消费方 -->
+    <dubbo:reference check="false" timeout="20000" interface="com.cyou.fz2035.matrix.api.service.DubboService"
+                     id="dubboService" version="1.1.0"/>
+    <dubbo:reference check="false" timeout="20000" interface="com.cyou.fz2035.filesystem.api.service.FileSystemService"
+                     id="fileSystemService" version="1.0.0"/>
+    <dubbo:reference check="false" timeout="20000" interface="com.cyou.fz2035.mc.api.service.MCDubboService"
+                     id="mcDubboService" version="1.0.0"/>
+    <dubbo:reference check="false" timeout="20000" interface="com.cyou.fz2035.services.calendar.api.service.ICalendarDubbo"
+                     id="calendarSoaService" version="1.0.0" />
+    <dubbo:reference check="false" timeout="20000" interface="com.cyou.fz2035.task.rpc.api.ITaskService"
+                     id="taskService" version="1.0.0" />
+</beans>

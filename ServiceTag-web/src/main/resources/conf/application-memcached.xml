@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+    <import resource="application-context.xml"></import>
+    <bean id="xmemcachedClientFactoryBean" class="net.rubyeye.xmemcached.utils.XMemcachedClientFactoryBean"
+          destroy-method="shutdown">
+        <property name="servers">
+            <value>
+                ${memcache.address}
+            </value>
+        </property>
+        <property name="failureMode" value="true"/>
+    </bean>
+
+    <bean id="XMemcacheHandler" class="com.cyou.fz2035.servicetag.memcached.XMemcacheHandler">
+        <property name="client" ref="xmemcachedClientFactoryBean"/>
+    </bean>
+    <!--cas支持-->
+    <bean id="XMemcachedCacheProxy" class="com.cyou.fz2035.servicetag.memcached.proxy.impl.XmemcachedCacheProxy">
+        <property name="addressList">
+            <value>${memcache.address}</value>
+        </property>
+        <property name="connectionPoolSize">
+            <value>10</value>
+        </property>
+    </bean>
+</beans>

@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd"
+       default-lazy-init="false">
+    <import resource="application-context.xml"></import>
+
+    <bean id="servicePublishConfigure"
+          class="com.cyou.fz2035.servicetag.servicedetail.publisher.ServicePublishConfigure">
+        <property name="urlsMap">
+            <map>
+                <!--100任务-->
+                <entry key="100_publish">
+                     <value>${service.url.task.publish}</value>
+               </entry>
+                <!--100任务-->
+                <entry key="100_republish">
+                    <value>${service.url.task.republish}</value>
+                </entry>
+                <entry key="100_end">
+                    <value> ${service.url.task.end}</value>
+                </entry>
+                <entry key="101_publish">
+                    <value></value>
+                </entry>
+                <entry key="102_publish">
+                    <value>${service.url.reward.publish}</value>
+                </entry>
+                <entry key="102_upload">
+                    <value>${service.url.reward.fileupload}</value>
+                </entry>
+            </map>
+        </property>
+    </bean>
+</beans>

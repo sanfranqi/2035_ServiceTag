@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+    <mvc:resources mapping="/fed/**" location="/fed/"/>
+    <mvc:resources mapping="/images/**" location="/images/"/>
+    <mvc:resources mapping="/addition/**" location="/addition/"/>
+    <context:component-scan base-package="com.cyou.fz2035.servicetag">
+        <context:include-filter type="regex" expression=".*?\\.action\\.*"/>
+    </context:component-scan>
+    <mvc:annotation-driven conversion-service="conversionService">
+        <mvc:message-converters register-defaults="true">
+            <bean class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">
+                <property name="supportedMediaTypes">
+                    <list>
+                        <value>application/json;charset=utf-8</value>
+                        <value>text/html;charset=utf-8</value>
+                        <value>application/x-javascript;charset=utf-8</value>
+                    </list>
+                </property>
+            </bean>
+        </mvc:message-converters>
+    </mvc:annotation-driven>
+
+    <mvc:interceptors>
+        <bean class=" com.cyou.fz2035.servicetag.context.LoginInteceptor"></bean>
+        <bean class=" com.cyou.fz2035.servicetag.context.ServiceTagInterceptor"></bean>
+    </mvc:interceptors>
+    <!-- 全局异常配置 start -->
+    <bean id="exceptionResolver" class="com.cyou.fz2035.servicetag.springmvc.exception.DividSimpleMappingExceptionResolver">
+        <property name="exceptionMappings">
+            <props>
+                <prop key="com.cyou.fz2035.certify.community.services.springmvc.exception.BusinessException">json</prop>
+                <prop key="java.lang.Exception">exception/error</prop>
+            </props>
+        </property>
+        <property name="statusCodes">
+            <props>
+                <prop key="exception/error">500</prop>
+                <prop key="exception/404">404</prop>
+            </props>
+        </property>
+        <!-- 设置日志输出级别，不定义则默认不输出警告等错误日志信息 -->
+        <property name="warnLogCategory" value="WARN"></property>
+        <!-- 默认错误页面，当找不到上面mappings中指定的异常对应视图时，使用本默认配置 -->
+        <property name="defaultErrorView" value="exception/error"></property>
+        <!-- 默认HTTP状态码 -->
+        <property name="defaultStatusCode" value="500"></property>
+    </bean>
+    <!-- 全局异常配置 end -->
+
+    <bean id="conversionService" class="org.springframework.format.support.FormattingConversionServiceFactoryBean">
+        <property name="converters">
+            <set>
+                <bean class="com.cyou.fz2035.servicetag.springmvc.DateConverter"/>
+                <bean class="com.cyou.fz2035.servicetag.springmvc.StringConverter"/>
+            </set>
+        </property>
+    </bean>
+
+<!--
+    &lt;!&ndash;- StringHttpMessageConverter bean &ndash;&gt;
+    <bean id = "stringHttpMessageConverter" class = "org.springframework.http.converter.StringHttpMessageConverter"/>
+    <bean id = "jacksonHttpMessageConverter" class="org.springframework.http.converter.json.MappingJacksonHttpMessageConverter"/>
+
+    &lt;!&ndash; 启动Spring MVC的注解功能，完成请求和注解POJO的映射 &ndash;&gt;
+    <bean class ="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter" >
+        <property name= "messageConverters" >
+            <list>
+                <ref bean = "jacksonHttpMessageConverter"/>
+                &lt;!&ndash; 新增的StringMessageConverter bean&ndash;&gt;
+                <ref bean= "stringHttpMessageConverter" />
+            </list>
+        </property>
+    </bean>
+
+-->
+
+    <bean id="scriptConversionService"
+          class="org.springframework.format.support.FormattingConversionServiceFactoryBean">
+        <property name="converters">
+            <set>
+                <bean class="com.cyou.fz2035.servicetag.springmvc.DateConverter"/>
+            </set>
+        </property>
+    </bean>
+        <mvc:default-servlet-handler/>
+        <bean id="handlerMapping" class="org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping">
+            <property name="defaultHandler" ref="wildcardMVCController"/>
+        </bean>
+    <bean id="wildcardMVCController" class="com.cyou.fz2035.servicetag.springmvc.WildcardMVCController"/>
+
+    <bean id="freemarkerConfig" class="org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer">
+        <property name="templateLoaderPath" value=""/>
+        <property name="freemarkerSettings">
+            <props>
+                <prop key="tag_syntax">auto_detect</prop>
+                <prop key="template_update_delay">0</prop>
+                <prop key="defaultEncoding">UTF-8</prop>
+                <prop key="url_escaping_charset">UTF-8</prop>
+                <prop key="locale">en_US</prop>
+                <prop key="boolean_format">true,false</prop>
+                <prop key="datetime_format">yyyy-MM-dd HH:mm:ss</prop>
+                <prop key="date_format">yyyy-MM-dd</prop>
+                <prop key="time_format">HH:mm:ss</prop>
+                <prop key="number_format">0.######</prop>
+                <prop key="whitespace_stripping">true</prop>
+                <!--空值处理<prop key="classic_compatible">true</prop>-->
+            </props>
+        </property>
+    </bean>
+    <!-- 支持上传文件 -->
+    <bean id="multipartResolver" class="com.cyou.fz2035.servicetag.servicebase.service.MyMultiPartResolver"/>
+
+    <bean class="org.springframework.web.servlet.view.freemarker.FreeMarkerViewResolver">
+        <property name="prefix" value="/WEB-INF/template/ftl/"></property>
+        <property name="suffix" value="/index.ftl"></property>
+        <property name="contentType" value="text/html; charset=UTF-8"/>
+        <property name="exposeSessionAttributes" value="true"/>
+        <property name="exposeSpringMacroHelpers" value="true"/>
+        <property name="viewClass" value="com.cyou.fz2035.servicetag.springmvc.WebFreeMarkerView"/>
+    </bean>
+</beans>

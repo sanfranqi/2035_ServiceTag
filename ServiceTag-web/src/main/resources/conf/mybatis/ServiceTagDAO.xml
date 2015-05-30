@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.cyou.fz2035.servicetag.servicetag.dao.ServiceTagDAO">
+
+	<resultMap type="com.cyou.fz2035.servicetag.servicetag.vo.ServiceTagListVo"
+		id="serviceTagListVo">
+		<result property="id" column="ID" />
+		<result property="serviceTagName" column="SERVICE_TAG_NAME" />
+		<result property="serviceTagImg" column="SERVICE_TAG_IMG" />
+		<result property="remark" column="REMARK" />
+		<result property="firstChar" column="FIRST_CHAR" />
+        <result property="serviceTagCode" column="SERVICE_TAG_CODE" />
+	</resultMap>
+
+	<select id="queryFocusServiceTag" flushCache="true" resultMap="serviceTagListVo">
+		<![CDATA[
+			select tst.ID ,tst.SERVICE_TAG_NAME ,tst.SERVICE_TAG_IMG,tst.REMARK,tst.FIRST_CHAR from
+			T_USER_GROUP_REL_USER tugru 
+			left join 
+			T_USER_GROUP tug 
+			on tugru.USER_GROUP_ID = tug.ID
+			left join
+			T_SERVICE_TAG tst
+			on tug.SERVICE_TAG_ID = tst.ID
+			where tugru.USER_ID=#{userId} and tst.STATUS='10' and tst.DELETE_FLAG=false
+			order by tugru.FOCUS_TIME desc limit ${rowStart},${pageSize}
+		]]>
+	</select>
+	
+	<select id="countFocusServiceTag" flushCache="true" resultType="int">
+		<![CDATA[
+			select count(1) from
+			T_USER_GROUP_REL_USER tugru 
+			left join 
+			T_USER_GROUP tug 
+			on tugru.USER_GROUP_ID = tug.ID
+			left join
+			T_SERVICE_TAG tst
+			on tug.SERVICE_TAG_ID = tst.ID
+			where tugru.USER_ID=#{userId} and tst.STATUS='10' and tst.DELETE_FLAG=false
+		]]>
+	</select>
+	
+	<select id="queryAllFocusServiceTag" flushCache="true" resultMap="serviceTagListVo">
+		<![CDATA[
+			select tst.ID ,tst.SERVICE_TAG_NAME ,tst.SERVICE_TAG_IMG,tst.REMARK,tst.FIRST_CHAR, tst.SERVICE_TAG_CODE from
+			T_USER_GROUP_REL_USER tugru 
+			left join 
+			T_USER_GROUP tug 
+			on tugru.USER_GROUP_ID = tug.ID
+			left join
+			T_SERVICE_TAG tst
+			on tug.SERVICE_TAG_ID = tst.ID
+			where tugru.USER_ID=#{userId} and tst.STATUS='10' and tst.DELETE_FLAG=false
+			order by tst.FIRST_CHAR asc
+		]]>
+	</select>
+</mapper>
+
+
+

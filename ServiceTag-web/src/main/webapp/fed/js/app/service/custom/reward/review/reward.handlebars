@@ -1,0 +1,29 @@
+<div class="article">
+    <div class="tit">悬赏主题：{{serviceBaseVo.serviceName}}</div>
+    <div class="txt">{{{toHtml serviceBaseVo.serviceDescribe}}}</div>
+</div>
+<div class="info-box">
+    <div class="item">
+        <span class="tit">评论隐私：</span>
+        {{#judge detailsAddition.origSecrecy '0'}}公开{{/judge}}
+        {{#judge detailsAddition.origSecrecy '1'}}不公开{{/judge}}
+        {{#judge detailsAddition.origSecrecy '2'}}悬赏结束后公开{{/judge}}
+    </div>
+    {{#notEmptyArray additionFiles}}
+        <div class="accessory-box2">
+            <div class="tit">附件：</div>
+
+            {{#each additionFiles}}
+                {{#isPic fileName}}
+                    <div class="info">
+                        <span>{{fileName}}</span><a href="javascript:;" data-role="preview" data-url="{{fileUrl}}" class="link">预览</a><a href="{{fileUrl}}" target="_blank" class="link">下载</a>
+                    </div>
+                {{else}}
+                    <div class="info">
+                        <span>{{fileName}}</span><a href="{{fileUrl}}" target="_blank" class="link">下载</a>
+                    </div>
+                {{/isPic}}
+            {{/each}}
+        </div>
+    {{/notEmptyArray}}
+</div>

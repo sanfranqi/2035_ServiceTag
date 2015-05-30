@@ -1,0 +1,1 @@
+define("app/common/sidebar",["$"],function(a){"use strict";var b=a("$");b(".nav-item:first,.nav-item:last").children("a").on("click",function(){b(this).parent().toggleClass("show")})});

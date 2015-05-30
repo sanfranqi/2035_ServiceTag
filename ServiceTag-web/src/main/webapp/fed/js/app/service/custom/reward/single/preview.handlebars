@@ -1,0 +1,27 @@
+<div class="mobile-hd">
+    <h2 class="tit">悬赏详情预览</h2>
+    <div class="time">{{now}}</div>
+</div>
+<div class="mobile-bd">
+    {{#if this}}
+        <div class="article">
+            <div class="tit">{{serviceBaseVo.serviceName}}</div>
+            <div class="txt">{{{toHtml serviceBaseVo.serviceDescribe}}}</div>
+        </div>
+        <div class="info">
+            <div>评论隐私：{{#judge detailsAddition.origSecrecy '0'}}公开{{/judge}}{{#judge detailsAddition.origSecrecy '1'}}不公开{{/judge}}{{#judge detailsAddition.origSecrecy '2'}}悬赏结束后公开{{/judge}}</div>
+            <div class="accessory-tit">附  件：</div>
+            <div class="accessory-box">
+                {{#each additionFiles}}
+                    <div class="accessory"><img src="{{getFileIcon fileUrl}}" alt="" class="pic-accessory" width="56" height="56"></div>
+                {{/each}}
+            </div>
+        </div>
+    {{else}}
+        <div class="nodata-box">
+            <img src="http://ue1.17173cdn.com/a/2035/open/2014/img/nodata.jpg" alt="暂无数据" width="84" height="90">
+            <div class="tit">暂无数据...</div>
+        </div>
+    {{/if}}
+</div>
+<div class="mobile-footer"></div>

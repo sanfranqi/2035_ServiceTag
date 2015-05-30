@@ -1,0 +1,29 @@
+{{#each listData}}
+    <li class="cascade-item" data-id="{{id}}" data-senduserid="{{sendUserId}}" data-receivetime="{{receiveTime}}">
+        <div class="per-info-box per-info-box-ex2">
+            <div class="pic-box"><img src="{{getAvatars sendUserId}}" class="pic-per" alt="" width="40" height="40">
+            </div>
+            <div class="detail-box">
+                <div class="name" title="{{userName}}">{{userName}}</div>
+                <div class="phone">{{cellphone}}</div>
+                <a href="javascript:;" class="btn btn-black" data-role="black" title="加入黑名单"></a>
+            </div>
+        </div>
+        <div class="time">时间：{{receiveTime}}</div>
+        <div class="detail">{{content}}</div>
+        <div class="reply-box">
+            <ul class="list-reply">
+                {{#each replyMessageList}}
+                    <li class="reply-item">{{replyContent}}<div class="reply-time">{{fDate replyTime}}</div></li>
+                {{/each}}
+            </ul>
+            <div class="comment-box">
+                <div class="form-group">
+                    <textarea class="form-control form-control-textarea form-control-textarea-h2" rows="2"></textarea>
+                </div>
+                <div class="num">0/300</div>
+                <a href="javascript:;" class="btn comm-btn2 comm-btn2-ex3" data-role="reply">回复</a>
+            </div>
+        </div>
+    </li>
+{{/each}}

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper
+	namespace="com.cyou.fz2035.servicetag.usergroupreluser.dao.UserGroupRelUserDAO">
+
+	<update id="replaceGroupId" flushCache="true">
+		<![CDATA[update T_USER_GROUP_REL_USER set USER_GROUP_ID=#{newGroupId} where USER_GROUP_ID=#{userGroupId}]]>
+	</update>
+
+	<update id="addUserToGroup" flushCache="true">
+		<![CDATA[update T_USER_GROUP_REL_USER set USER_GROUP_ID=#{newGroupId} where USER_GROUP_ID=#{userGroupId} and USER_ID=#{userId}]]>
+	</update>
+	
+	<select id="validIsInblack" flushCache="true" resultType="int">
+		<![CDATA[select count(1) from T_USER_GROUP_REL_USER where USER_GROUP_ID=#{blackGroupId} and USER_ID=#{userId}]]>
+	</select>
+</mapper>
+
+
+

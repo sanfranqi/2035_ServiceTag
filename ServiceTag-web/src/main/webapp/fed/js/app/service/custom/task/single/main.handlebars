@@ -1,0 +1,128 @@
+<div class="mobile-box" id="J_Preview"></div>
+<div class="comm-mod2 mod-custom">
+    <form id="J_Form">
+        <input type="hidden" name="serviceBaseVo.id" {{#if this}}value="{{serviceBaseVo.id}}"{{/if}} />
+        <input type="hidden" name="serviceBaseVo.businessId" {{#if this}}value="{{serviceBaseVo.businessId}}"{{/if}} />
+        <input type="hidden" name='attachFiles1' {{#if this}}value="{{detailsAddition.attachFiles1}}"{{/if}} />
+        <input type="hidden" name='attachFiles2' {{#if this}}value="{{detailsAddition.attachFiles2}}"{{/if}} />
+        <input type="hidden" name='attachFiles3' {{#if this}}value="{{detailsAddition.attachFiles3}}"{{/if}} />
+
+        <div class="mod-hd">
+            {{#if this}}
+                <h2 class="tit">编辑任务</h2>
+            {{else}}
+                <h2 class="tit">创建任务</h2>
+            {{/if}}
+        </div>
+        <div class="mod-bd">
+            <table class="comm-table">
+                <tbody>
+                <tr>
+                    <th><span class="c-sign">*</span>名称</th>
+                    <td>
+                        <div class="form-group">
+                            <input type="text" class="form-control" name="serviceBaseVo.serviceName" {{#if this}}value="{{serviceBaseVo.serviceName}}"{{/if}}>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <th>描述</th>
+                    <td>
+                        <div class="form-group">
+                            <textarea class="form-control form-control-textarea" name="serviceBaseVo.serviceDescribe" rows="5">{{#if this}}{{serviceBaseVo.serviceDescribe}}{{/if}}</textarea>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <th><span class="c-sign">*</span>时间</th>
+                    <td>
+                        <div class="form-group form-time">
+                            <input type="text" class="form-control" readonly="readonly" id="J_StartTime" name='detailsAddition["startTime"]' {{#if this}}value="{{fDate detailsAddition.startTime}}"{{/if}}>
+                            <span class="sep">-</span>
+                            <input type="text" class="form-control" readonly="readonly" id="J_EndTime" name='detailsAddition["endTime"]' {{#if this}}value="{{fDate detailsAddition.endTime}}"{{/if}}>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <th>附件</th>
+                    <td>
+                        <div class="form-group">
+                            <a href="javascript:;" class="comm-btn btn-w" id="J_Uploader">选择文件</a>
+                            <span class="help-tip">不超过3个，大小不超过20MB</span>
+                        </div>
+                        <div class="accessory-box">
+                            {{#if this}}
+                                {{#if detailsAddition.attachFiles1}}
+                                    <div class="accessory">
+                                        <img src="{{getFileIcon detailsAddition.attachFiles1}}" data-name='attachFiles1' alt="" class="pic-accessory" width="56" height="56">
+                                        <a href="javascript:;" class="btn-close"></a>
+                                    </div>
+                                {{else}}
+                                    <div class="accessory">
+                                        <img src="http://ue1.17173cdn.com/a/2035/open/2014/img/f0.jpg" data-name='attachFiles1' alt="" class="pic-accessory" width="56" height="56">
+                                    </div>
+                                {{/if}}
+                                {{#if detailsAddition.attachFiles2}}
+                                    <div class="accessory">
+                                        <img src="{{getFileIcon detailsAddition.attachFiles2}}" data-name='attachFiles2' alt="" class="pic-accessory" width="56" height="56">
+                                        <a href="javascript:;" class="btn-close"></a>
+                                    </div>
+                                {{else}}
+                                    <div class="accessory">
+                                        <img src="http://ue1.17173cdn.com/a/2035/open/2014/img/f0.jpg" data-name='attachFiles2' alt="" class="pic-accessory" width="56" height="56">
+                                    </div>
+                                {{/if}}
+                                {{#if detailsAddition.attachFiles3}}
+                                    <div class="accessory">
+                                        <img src="{{getFileIcon detailsAddition.attachFiles3}}" data-name='attachFiles3' alt="" class="pic-accessory" width="56" height="56">
+                                        <a href="javascript:;" class="btn-close"></a>
+                                    </div>
+                                {{else}}
+                                    <div class="accessory">
+                                        <img src="http://ue1.17173cdn.com/a/2035/open/2014/img/f0.jpg" data-name='attachFiles3' alt="" class="pic-accessory" width="56" height="56">
+                                    </div>
+                                {{/if}}
+                            {{else}}
+                                <div class="accessory">
+                                    <img src="http://ue1.17173cdn.com/a/2035/open/2014/img/f0.jpg" data-name='attachFiles1' alt="" class="pic-accessory" width="56" height="56">
+                                </div>
+                                <div class="accessory">
+                                    <img src="http://ue1.17173cdn.com/a/2035/open/2014/img/f0.jpg" data-name='attachFiles2' alt="" class="pic-accessory" width="56" height="56">
+                                </div>
+                                <div class="accessory">
+                                    <img src="http://ue1.17173cdn.com/a/2035/open/2014/img/f0.jpg" data-name='attachFiles3' alt="" class="pic-accessory" width="56" height="56">
+                                </div>
+                            {{/if}}
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <th></th>
+                    <td>
+                        <div class="form-group form-group-inline has-error">
+                            <p class="validatorError help-block">&nbsp;</p>
+                        </div>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="mod-footer">
+            {{#if this}}
+                {{#judge serviceBaseVo.status '10'}}
+                {{!-- 保存未发布 --}}
+                    <a href="javascript:;" class="comm-btn" data-role="saveAndPublish">保存并发布</a>
+                    <a href="javascript:;" class="comm-btn" data-role="save">保存</a>
+                    <a href="javascript:;" class="comm-btn" data-role="cancel">还原</a>
+                {{else}}
+                {{!-- 已经发布 --}}
+                    <a href="javascript:;" class="comm-btn" data-role="saveAndRepublish">保存并同步</a>
+                    <a href="javascript:;" class="comm-btn" data-role="cancel">还原</a>
+                {{/judge}}
+            {{else}}
+                <a href="javascript:;" class="comm-btn" data-role="saveAndPublish">保存并发布</a>
+                <a href="javascript:;" class="comm-btn" data-role="save">保存</a>
+            {{/if}}
+        </div>
+    </form>
+</div>
